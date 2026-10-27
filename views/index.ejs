@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <h1>Welcome to your inventory manager</h1>
+    <h2><%= title %></h2>
+
+    <h3>This is where your things will go:</h3>
+    
+    <!-- Replace part_name / brand with your own table's columns -->
+
+  <ul>
+        <% allItems.forEach((item) => { %>
+            <li>
+                <b><%= item.part_name %></b>
+                <p><%= item.brand %></p>
+            </li>
+        <% }); %>
+    </ul>
+
+    <h3> Add an item: </h3>
+    <%- include("partials/itemForm") %>
+
+    
+</body>
+</html>

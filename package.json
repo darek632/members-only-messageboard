@@ -1,0 +1,22 @@
+{
+  "name": "express-postgres-starter",
+  "version": "1.0.0",
+  "description": "Sample express set up establishing a local server and a db server with sample listen, routing, controllers and queries",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "node db/populatedb.js postgresql://YOUR_USER@localhost:5432/CHANGE_ME",
+    "clear": "node db/cleardb.js postgresql://YOUR_USER@localhost:5432/CHANGE_ME"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "dotenv": "^18.0.8",
+    "ejs": "^7.0.1",
+    "express": "^5.3.0",
+    "express-validator": "^7.3.2",
+    "pg": "^8.23.1"
+  }
+}
