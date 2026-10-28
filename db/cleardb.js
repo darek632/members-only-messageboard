@@ -15,7 +15,7 @@ console.log("dropping...");
 
   const client = new Client({ connectionString });
   await client.connect();
-  await client.query("DROP TABLE IF EXISTS items;");
+  await client.query("DROP TABLE IF EXISTS messages,users;");
   await client.end();
   console.log("done");
 }

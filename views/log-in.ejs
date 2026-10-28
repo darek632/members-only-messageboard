@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in</title>
+</head>
+<body>
+
+    <% if (locals.notice) { %>
+    <p><%= notice %></p>
+    <% } %>
+    <% if (locals.messages && messages.length) { %>
+    <p><%= messages[messages.length - 1] %></p>
+    <% } %>
+
+    <h1>LOG IN</h1>
+    <form action="/log-in" method="POST">
+        <label for="username">Username</label>
+        <input id="username" name="username" placeholder="username" type="text" />
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" />
+        <button type="submit">Log In</button>
+    </form>
+    
+</body>
+</html>

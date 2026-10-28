@@ -4,16 +4,37 @@
 
 const { Client } = require("pg");
 
-const SQL = `CREATE TABLE IF NOT EXISTS items (
-  id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  part_name VARCHAR(255) NOT NULL,
-  brand VARCHAR(100) NOT NULL
+const SQL = `CREATE TABLE users (
+  id          INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  first_name  VARCHAR(255) NOT NULL,
+  last_name   VARCHAR(255) NOT NULL,
+  username    VARCHAR(255) NOT NULL UNIQUE,   
+  password    VARCHAR(255) NOT NULL,          
+  membership_status BOOLEAN DEFAULT false,
+  is_admin BOOLEAN NOT NULL DEFAULT false
 );
 
-INSERT INTO items (part_name, brand)
+CREATE TABLE messages (
+  id         INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  title      VARCHAR(255) NOT NULL,
+  text       TEXT NOT NULL,
+  timestamp  TIMESTAMPTZ DEFAULT NOW(),
+  user_id    INTEGER REFERENCES users(id) ON DELETE CASCADE
+);
+
+INSERT INTO users (first_name, last_name, username, password, membership_status)
 VALUES
-  ('11-speed chain', 'Shimano'),
-  ('Inner tube 700x25c', 'Continental');
+  ('Ted', 'Tetley', 'tetleyted', '1234', true),
+  ('Sara', 'Lopez', 'lopeysara', '1234', false),
+  ('Ben', 'Okafor', 'okben', '1234', true);
+
+INSERT INTO messages (title, text, user_id)
+VALUES
+  ('Hello world', 'First message on the board!', 1),
+  ('Tea recommendations?', 'Looking for a good breakfast tea.', 1),
+  ('New here', 'Just joined, hi everyone.', 2),
+  ('Members only', 'Glad to finally be a member.', 3),
+  ('Weekend plans', 'Anyone going hiking on Saturday?', 3);
 `;
 
 async function main() {

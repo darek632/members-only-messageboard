@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>become a member</title>
+</head>
+<body>
+    
+  <h1>Join the club</h1>
+  <p>Enter the secret passcode to see who wrote each message.</p>
+
+  <% if (locals.errors) { %>
+    <ul>
+      <% errors.forEach((error) => { %>
+        <li><%= error.msg %></li>
+      <% }) %>
+    </ul>
+  <% } %>
+
+  <form action="/join-club" method="POST">
+    <label for="passcode">Passcode</label>
+    <input type="password" id="passcode" name="passcode" required>
+    <button type="submit">Join</button>
+  </form>
+
+  <a href="/">Back to messages</a>
+
+    
+</body>
+</html>

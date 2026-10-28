@@ -6,24 +6,48 @@
     <title>Home</title>
 </head>
 <body>
-    <h1>Welcome to your inventory manager</h1>
-    <h2><%= title %></h2>
+    <h1><%= title %></h1>
 
-    <h3>This is where your things will go:</h3>
+    <h3>Here is the main messageboard:</h3>
     
-    <!-- Replace part_name / brand with your own table's columns -->
+    <% if (locals.currentUser) {%>
+    <h1>WELCOME <%= currentUser.username %></h1>
 
-  <ul>
-        <% allItems.forEach((item) => { %>
-            <li>
-                <b><%= item.part_name %></b>
-                <p><%= item.brand %></p>
-            </li>
-        <% }); %>
-    </ul>
+    <a href="/new-message">Write a message</a>
 
-    <h3> Add an item: </h3>
-    <%- include("partials/itemForm") %>
+    <form action="/log-out" method="POST">
+    <button type="submit">Log out</button>
+  </form>
+
+        <% if (!currentUser.membership_status) { %>
+            <a href="/join-club">Join the club</a>
+        <% } %>
+    <% } else { %>
+
+<h1>please log in</h1>
+<% } %>
+
+
+<% if (messages.length === 0) { %>
+  <p>No messages yet.</p>
+<% } %>
+
+<% messages.forEach((message) => { %>
+  <div class="message">
+    <h2><%= message.title %></h2>
+    <p><%= message.text %></p>
+    <% if (locals.currentUser && currentUser.membership_status) { %>
+        <p>By <%= message.first_name %> <%= message.last_name %>
+            on <%= new Date(message.timestamp).toLocaleString() %></p>
+    <% } %>
+    <% if (locals.currentUser?.is_admin) { %>
+        <form action="/messages/<%= message.id %>/delete" method="POST">
+            <button type="submit">Delete</button>
+        </form>
+    <% } %>
+  </div>
+<% }) %>
+
 
     
 </body>

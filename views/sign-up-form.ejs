@@ -1,0 +1,46 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ </head>
+ <body>
+
+      <% if (locals.errors) { %>
+        <ul>
+            <% errors.forEach((error) => { %>
+            <li><%= error.msg %></li>
+            <% }) %>
+        </ul>
+    <% } %>
+
+    <form action="/sign-up" method="POST">
+    <label for="first_name">First name</label>
+    <input type="text" id="first_name" name="first_name" 
+    value="<%= locals.user ? user.first_name : '' %>">
+    <!-- required> -->
+
+    <label for="last_name">Last name</label>
+    <input type="text" id="last_name" name="last_name" 
+    value="<%= locals.user ? user.last_name : '' %>">
+    <!-- required> -->
+
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" 
+    value="<%= locals.user ? user.username : '' %>">
+    <!-- required> -->
+
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" required>
+
+    <label for="confirm_password">Confirm password</label>
+    <input type="password" id="confirm_password" name="confirm_password" required>
+
+    <button type="submit">Sign Up</button>
+  </form>
+    
+ </body>
+ </html>
+ 
+ 
